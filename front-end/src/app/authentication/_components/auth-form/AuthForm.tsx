@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Button from "@/src/_components/Button";
+import Input from "@/src/_components/Input";
 
 const AuthForm = () => {
   const [email, setEmail] = useState("");
@@ -18,37 +19,13 @@ const AuthForm = () => {
   return (
     <form className="w-full space-y-2">
       {/* ==== Email ==== */}
-      <div className="flex-col space-y-0.5">
-        <label className="font-medium" htmlFor="email">
-          Email
-        </label>
-        <input
-          className="rounded-md border border-gray-200 p-2 text-sm"
-          type="text"
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </div>
+      <Input label="Email" type="text" onChange={handleEmailChange} />
 
       {/* ==== Password ==== */}
-      <div className="flex-col space-y-0.5">
-        <label className="font-medium" htmlFor="password">
-          Password
-        </label>
-        <input
-          className="rounded-md border border-gray-200 p-2 text-sm"
-          type="text"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        {/* <button className="password-toggle"></button> */}
-      </div>
+      <Input label="Password" type="text" onChange={handlePasswordChange} />
 
       {/* ==== Button ==== */}
-      <Button
-        className="mt-3 w-full bg-black py-3 text-white"
-        type="submit"
-      >
+      <Button className="mt-3 w-full bg-black py-3 text-white" type="submit">
         Login
       </Button>
     </form>
