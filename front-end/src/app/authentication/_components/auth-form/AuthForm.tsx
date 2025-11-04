@@ -19,10 +19,10 @@ const AuthForm = () => {
   return (
     <form className="w-full space-y-2">
       {/* ==== Email ==== */}
-      <Input label="Email" type="text" onChange={handleEmailChange} />
+      <Input label="Email" type="text" placeholder="you@example.com" onChange={handleEmailChange} />
 
       {/* ==== Password ==== */}
-      <Input label="Password" type="text" onChange={handlePasswordChange} />
+      <Input label="Password" type="text" placeholder="Enter your password" onChange={handlePasswordChange} />
 
       {/* ==== Button ==== */}
       <Button className="mt-3 w-full bg-black py-3 text-white" type="submit">
