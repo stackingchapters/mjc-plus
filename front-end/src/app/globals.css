@@ -48,21 +48,4 @@ body,
 }
 
 @layer utilities {
-  /* Flex directions */
-  .flex-row {
-    display: flex;
-    flex-direction: row;
-  }
-  .flex-row-reverse {
-    display: flex;
-    flex-direction: row-reverse;
-  }
-  .flex-col {
-    display: flex;
-    flex-direction: column;
-  }
-  .flex-col-reverse {
-    display: flex;
-    flex-direction: column-reverse;
-  }
 }

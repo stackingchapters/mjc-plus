@@ -1,5 +1,5 @@
 import React from "react";
-import { SvgGoogle, SvgMicrosoft } from "@/src/_components/svgs";
+import { SvgGoogle, SvgMicrosoft } from "@/src/_components/logos";
 import ThirdPartyAuthItem from "./ThirdPartyAuthItem";
 import type { AuthMode } from "../../types";
 
