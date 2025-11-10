@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Home from "./home/page";
 import AuthPage from "./authentication/page";
 
-export default function Home() {
+export default function App() {
   return (
-    <div className="flex h-full flex-col items-center justify-center">
-      <AuthPage />
+    <div className="h-full">
+      <Home />
     </div>
   );
 }
