@@ -1,9 +1,13 @@
 import React from "react";
 import { SvgGoogle, SvgMicrosoft } from "@/src/_components/logos";
 import ThirdPartyAuthItem from "./ThirdPartyAuthItem";
-import type { AuthMode } from "../../types";
+import { AuthMode } from "@/src/_enums/auth.enum";
 
-const ThirdPartyAuth = ({ mode }: AuthMode) => {
+interface ThirdPartyAuthProps {
+  mode: AuthMode;
+}
+
+const ThirdPartyAuth = ({ mode }: ThirdPartyAuthProps) => {
   return (
     <div className="w-full space-y-3">
       <ThirdPartyAuthItem Icon={SvgGoogle}>
