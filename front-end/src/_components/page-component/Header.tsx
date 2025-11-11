@@ -1,32 +1,56 @@
 import React from "react";
 import SvgMjcLogo from "../logos/MjcLogo";
+import SvgMjcLogoModern from "../logos/MjcLogoModern";
+import Link from "next/link";
+import { Routes } from "@/src/_enums/routes.enum";
 
-const linkItems = ["Home", "Modules", "About Us", "Sponsors"];
+const navItems = ["Home", "Modules", "About Us", "Sponsors"];
 
 const Header = () => {
   return (
-    <div className="flex items-center justify-between px-4 py-3">
-      <SvgMjcLogo className="size-15" />
+    <header className="flex items-center justify-between p-4 text-lg md:px-30">
+      <Link
+        href={Routes.HOME}
+        className="block transform transition-transform duration-300 hover:scale-110 hover:opacity-80"
+      >
+        <SvgMjcLogoModern className="size-10 md:size-14" />
+      </Link>
 
       {/* Desktop Nav */}
-      <ul className="hidden gap-6 text-sm md:flex">
-        {linkItems.map((item, idx) => (
-          <li key={idx}>
-            <a className="cursor-pointer hover:underline">{item}</a>
-          </li>
-        ))}
-      </ul>
+      <nav>
+        <ul className="hidden gap-14 md:flex">
+          {navItems.map((item, idx) => (
+            <li key={idx} className="group relative">
+              <Link
+                href=""
+                className="block pb-1 text-inherit transition duration-200 group-hover:text-red-500"
+              >
+                {item}
+              </Link>
+              <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-red-500 transition-all duration-300 ease-out group-hover:w-full"></span>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       {/* Desktop Auth Button */}
-      <div className="hidden cursor-pointer text-sm md:block">Sign Up</div>
+      <div className="group relative">
+        <Link
+          href={Routes.SIGNIN}
+          className="hidden cursor-pointer text-red-500 md:block"
+        >
+          Sign in
+        </Link>
+        <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-red-500 transition-all duration-300 ease-out group-hover:w-full"></span>
+      </div>
 
       {/* Mobile Burger Menu */}
-      <button className="md:hidden flex flex-col gap-1.5 p-2">
+      <button className="flex flex-col gap-1.5 p-2 md:hidden">
         <span className="block h-0.5 w-6 rounded bg-black"></span>
         <span className="block h-0.5 w-6 rounded bg-black"></span>
         <span className="block h-0.5 w-6 rounded bg-black"></span>
       </button>
-    </div>
+    </header>
   );
 };
 
