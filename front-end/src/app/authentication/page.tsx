@@ -9,6 +9,7 @@ import {
 } from "./_components";
 import SvgMjcLogo from "@/src/_components/logos/MjcLogo";
 import { AuthMode } from "@/src/_enums/auth.enum";
+import { supabase } from "../supabase-client";
 
 interface AuthProps {
   mode: AuthMode;
@@ -44,7 +45,7 @@ const AuthPage = () => {
           <ThirdPartyAuth mode={MODE} />
           <Divider />
           <AuthForm mode={MODE} />
-          <Footer isSignUp={isSignUp} />
+          <Footer isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
         </div>
       </div>
     </div>
