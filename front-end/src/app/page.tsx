@@ -1,7 +1,7 @@
 "use client";
 
 import Home from "./home/page";
-import { AuthContext } from "../_contexts/AuthContext";
+import { AuthSessionContext } from "../_contexts/AuthSessionContext";
 import type { Session } from "@supabase/supabase-js";
 import { supabase } from "./supabase-client";
 import { useEffect, useState } from "react";
@@ -25,9 +25,9 @@ export default function App() {
   }, []);
   return (
     <div className="h-full">
-      <AuthContext.Provider value={session}>
+      <AuthSessionContext.Provider value={session}>
         <Home />
-      </AuthContext.Provider>
+      </AuthSessionContext.Provider>
     </div>
   );
 }

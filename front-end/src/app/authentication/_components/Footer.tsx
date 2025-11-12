@@ -1,11 +1,10 @@
 import React, { Dispatch, SetStateAction } from "react";
+import { useAuthModeContext } from "@/src/_contexts/AuthModeContext";
 
-interface FooterProps {
-  isSignUp: boolean;
-  setIsSignUp: Dispatch<SetStateAction<boolean>>;
-}
-
-const Footer = ({ isSignUp, setIsSignUp }: FooterProps) => {
+const Footer = () => {
+  const authMode = useAuthModeContext();
+  const isSignUp = authMode.isSignUp;
+  const setIsSignUp = authMode.setIsSignUp;
   if (isSignUp) {
     return (
       <div className="flex items-center gap-2 text-xs md:text-sm">

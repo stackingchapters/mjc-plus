@@ -9,6 +9,8 @@ import {
 } from "./_components";
 import SvgMjcLogo from "@/src/_components/logos/MjcLogo";
 import { AuthMode } from "@/src/_enums/auth.enum";
+import { AuthModeContext } from "@/src/_contexts/AuthModeContext";
+import type { AuthModeStateProps } from "@/src/_types/AuthModeStateProps";
 import { supabase } from "../supabase-client";
 
 interface AuthProps {
@@ -18,7 +20,12 @@ interface AuthProps {
 }
 
 const AuthPage = () => {
-  const [isSignUp, setIsSignUp] = useState(true);
+  const [isSignUp, setIsSignUp] = useState(false);
+
+  const authModeState: AuthModeStateProps = {
+    isSignUp: isSignUp,
+    setIsSignUp: setIsSignUp,
+  };
 
   const SIGNUP: AuthProps = {
     mode: AuthMode.SIGNUP,
@@ -34,18 +41,20 @@ const AuthPage = () => {
   const MODE: AuthMode = isSignUp ? SIGNUP.mode : LOGIN.mode;
 
   return (
-    <div className="h-full w-full flex flex-col items-center bg-[#f5f4f7]">
+    <div className="flex h-full w-full flex-col items-center bg-[#f5f4f7]">
       {/* ==== MJC Logo ==== */}
       <SvgMjcLogo className="size-25 translate-y-1/2 transform" />
       {/* ==== Card ==== */}
-      <div className="w-xs flex flex-col items-center rounded-2xl bg-white py-12 sm:w-lg">
+      <div className="flex w-xs flex-col items-center rounded-2xl bg-white py-12 sm:w-lg">
         {/* ==== Content ==== */}
-        <div className="w-4/5 flex flex-col items-center gap-3 sm:w-3/5">
-          <Header mode={MODE} />
-          <ThirdPartyAuth mode={MODE} />
-          <Divider />
-          <AuthForm mode={MODE} />
-          <Footer isSignUp={isSignUp} setIsSignUp={setIsSignUp} />
+        <div className="flex w-4/5 flex-col items-center gap-3 sm:w-3/5">
+          <AuthModeContext.Provider value={authModeState}>
+            <Header mode={MODE} />
+            <ThirdPartyAuth mode={MODE} />
+            <Divider />
+            <AuthForm mode={MODE} />
+            <Footer />
+          </AuthModeContext.Provider>
         </div>
       </div>
     </div>
