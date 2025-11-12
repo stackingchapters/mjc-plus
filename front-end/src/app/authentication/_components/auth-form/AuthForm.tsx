@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import Button from "@/src/_components/Button";
-import Input from "@/src/_components/Input";
+import Button from "@/src/_components/ui/Button";
+import Input from "@/src/_components/ui/Input";
 import { AuthMode } from "@/src/_enums/auth.enum";
 
 interface AuthFormProps {
-  mode: AuthMode
+  mode: AuthMode;
 }
 
 const AuthForm = ({ mode }: AuthFormProps) => {
@@ -42,7 +42,10 @@ const AuthForm = ({ mode }: AuthFormProps) => {
       />
 
       {/* ==== Button ==== */}
-      <Button className="mt-3 w-full bg-black py-3 text-white" type="submit">
+      <Button
+        className="mt-3 w-full bg-black py-3 text-white transition duration-200"
+        type="submit"
+      >
         {mode}
       </Button>
     </form>

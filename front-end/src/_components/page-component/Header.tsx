@@ -1,21 +1,14 @@
 import React from "react";
-import SvgMjcLogo from "../logos/MjcLogo";
-import SvgMjcLogoModern from "../logos/MjcLogoModern";
 import Link from "next/link";
 import { Routes } from "@/src/_enums/routes.enum";
+import MjcLogo from "../ui/MjcLogo";
 
 const navItems = ["Home", "Modules", "About Us", "Sponsors"];
 
 const Header = () => {
   return (
     <header className="flex items-center justify-between p-4 text-lg md:px-30">
-      <Link
-        href={Routes.HOME}
-        className="block transform transition-transform duration-300 hover:scale-110 hover:opacity-80"
-      >
-        <SvgMjcLogoModern className="size-10 md:size-14" />
-      </Link>
-
+      <MjcLogo innerClassName="size-10 md:size-14" />
       {/* Desktop Nav */}
       <nav>
         <ul className="hidden gap-14 md:flex">
@@ -37,7 +30,7 @@ const Header = () => {
       <div className="group relative">
         <Link
           href={Routes.SIGNIN}
-          className="hidden cursor-pointer text-red-500 md:block"
+          className="hidden cursor-pointer pb-1 text-red-500 md:block"
         >
           Sign in
         </Link>
