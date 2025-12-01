@@ -12,10 +12,15 @@ interface AuthFormProps {
 
 const AuthForm = ({ mode }: AuthFormProps) => {
   const { isSignUp, setIsSignUp } = useAuthModeContext();
-
+  /* ==== States ==== */
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<{ email: string; password: string }>({
+    email: "",
+    password: ",",
+  });
 
+  /* ==== Handlers ==== */
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setEmail(value);
@@ -44,6 +49,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
       if (signInError)
         return console.error("Error signing in:", signInError.message);
     }
+    console.log("Signed up successfully!")
   };
 
   return (
