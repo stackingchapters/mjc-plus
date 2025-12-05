@@ -5,7 +5,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string | boolean;
 }
 
-const Input = ({ label, error, id, className, ...props }: InputProps) => {
+const Input = ({ label, value, error, id, className, ...props }: InputProps) => {
   const inputId = id
   const base =
     "w-full px-3 py-2 rounded-md border text-sm transition-colors placeholder-gray-400";
@@ -21,6 +21,7 @@ const Input = ({ label, error, id, className, ...props }: InputProps) => {
       </label>
       <input
         id={inputId}
+        value={value}
         placeholder={props.placeholder}
         className={`${base} ${normal}`}
         onChange={props.onChange}
