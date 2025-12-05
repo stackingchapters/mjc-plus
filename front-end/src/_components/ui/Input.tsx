@@ -27,7 +27,7 @@ const Input = ({ label, value, error, id, className, ...props }: InputProps) => 
         onChange={props.onChange}
       />
       {error && typeof error === "string" && (
-        <p className="mt-1 text-xs text-red-600">{error}</p>
+        <p className="mt-1 text-xs text-red-500">*{error}</p>
       )}
     </div>
   );
