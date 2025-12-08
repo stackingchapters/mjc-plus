@@ -2,27 +2,10 @@
 import { FormEvent, useReducer, ActionDispatch } from "react";
 import Button from "@/src/_components/ui/Button";
 import Input from "@/src/_components/ui/Input";
-import { AuthMode } from "@/src/_enums/authMode.enum";
 import { useAuthModeContext } from "@/src/_contexts/AuthModeContext";
 import { supabase } from "@/src/app/supabase-client";
 import { AuthActionType } from "@/src/_enums/authActionType.enum";
-
-interface AuthFormProps {
-  mode: AuthMode;
-}
-
-interface AuthFormState {
-  email: string;
-  password: string;
-  emailError: string | undefined;
-  passwordError: string | undefined;
-}
-
-interface AuthFormAction {
-  type: string;
-  key: string;
-  value: string;
-}
+import type { AuthFormProps, AuthFormState, AuthFormAction } from "../../type";
 
 const initialState: AuthFormState = {
   email: "",
@@ -53,7 +36,7 @@ const reducer = (state: AuthFormState, action: AuthFormAction) => {
   }
 };
 
-const regexTest = (
+const validateFormFields = (
   email: string,
   password: string,
   dispatch: ActionDispatch<[action: AuthFormAction]>,
@@ -96,7 +79,7 @@ const AuthForm = ({ mode }: AuthFormProps) => {
   /* ==== Handlers ==== */
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const hasError = regexTest(email, password, dispatch);
+    const hasError = validateFormFields(email, password, dispatch);
 
     if (hasError) return;
     if (isSignedIn) {
