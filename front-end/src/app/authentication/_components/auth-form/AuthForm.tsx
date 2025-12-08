@@ -58,22 +58,23 @@ const regexTest = (
   password: string,
   dispatch: ActionDispatch<[action: AuthFormAction]>,
 ) => {
+  let hasError = false;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^\S{8,16}$/;
+  if (!emailRegex.test(email)) hasError = true;
+  dispatch({
+    type: AuthActionType.UPDATE_ERROR,
+    key: "emailError",
+    value: "Invalid email format",
+  });
 
-  if (!emailRegex.test(email))
-    dispatch({
-      type: AuthActionType.UPDATE_ERROR,
-      key: "emailError",
-      value: "Invalid email format",
-    });
-
-  if (!passwordRegex.test(password))
-    dispatch({
-      type: AuthActionType.UPDATE_ERROR,
-      key: "passwordError",
-      value: "Password length must be within 8 to 16",
-    });
+  if (!passwordRegex.test(password)) hasError = true;
+  dispatch({
+    type: AuthActionType.UPDATE_ERROR,
+    key: "passwordError",
+    value: "Password length must be within 8 to 16",
+  });
+  return hasError;
 };
 
 const clearForm = (dispatch: ActionDispatch<[action: AuthFormAction]>) => {
@@ -95,9 +96,9 @@ const AuthForm = ({ mode }: AuthFormProps) => {
   /* ==== Handlers ==== */
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    regexTest(email, password, dispatch);
+    const hasError = regexTest(email, password, dispatch);
 
-    if (emailError && passwordError) return;
+    if (hasError) return;
     if (isSignedIn) {
       const { error: signUpError } = await supabase.auth.signUp({
         email,
