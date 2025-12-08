@@ -2,7 +2,6 @@
 import { FormEvent, useReducer, ActionDispatch } from "react";
 import Button from "@/src/_components/ui/Button";
 import Input from "@/src/_components/ui/Input";
-import { useAuthModeContext } from "@/src/_contexts/AuthModeContext";
 import { supabase } from "@/src/app/supabase-client";
 import { AuthActionType } from "@/src/_enums/authActionType.enum";
 import type { AuthFormState, AuthFormAction } from "../../type";
@@ -41,23 +40,7 @@ const validateFormFields = (
   password: string,
   dispatch: ActionDispatch<[action: AuthFormAction]>,
 ) => {
-  let hasError = false;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex = /^\S{8,16}$/;
-  if (!emailRegex.test(email)) hasError = true;
-  dispatch({
-    type: AuthActionType.UPDATE_ERROR,
-    key: "emailError",
-    value: "Invalid email format",
-  });
-
-  if (!passwordRegex.test(password)) hasError = true;
-  dispatch({
-    type: AuthActionType.UPDATE_ERROR,
-    key: "passwordError",
-    value: "Password length must be within 8 to 16",
-  });
-  return hasError;
+  return;
 };
 
 const clearForm = (dispatch: ActionDispatch<[action: AuthFormAction]>) => {
@@ -68,10 +51,7 @@ const clearForm = (dispatch: ActionDispatch<[action: AuthFormAction]>) => {
   });
 };
 
-const AuthForm = () => {
-  /* ==== Context ==== */
-  const { isSignedIn, setIsSignedIn } = useAuthModeContext();
-
+const SignUpForm = () => {
   /* ==== States ==== */
   const [state, dispatch] = useReducer(reducer, initialState);
   const { email, password, emailError, passwordError } = state;
@@ -81,22 +61,21 @@ const AuthForm = () => {
     e.preventDefault();
     const hasError = validateFormFields(email, password, dispatch);
 
-    if (hasError) return;
-    if (isSignedIn) {
-      const { error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-      if (signUpError)
-        return console.error("Error signing up:", signUpError.message);
-    } else {
-      const { error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      if (signInError)
-        return console.error("Error signing in:", signInError.message);
-    }
+    // if (isSignedIn) {
+    //   const { error: signUpError } = await supabase.auth.signUp({
+    //     email,
+    //     password,
+    //   });
+    //   if (signUpError)
+    //     return console.error("Error signing up:", signUpError.message);
+    // } else {
+    //   const { error: signInError } = await supabase.auth.signInWithPassword({
+    //     email,
+    //     password,
+    //   });
+    //   if (signInError)
+    //     return console.error("Error signing in:", signInError.message);
+    // }
 
     clearForm(dispatch);
     console.log("Signed up successfully!");
@@ -143,10 +122,10 @@ const AuthForm = () => {
         className="mt-3 w-full bg-black py-3 text-white transition duration-200"
         type="submit"
       >
-        Login
+        Sign Up
       </Button>
     </form>
   );
 };
 
-export default AuthForm;
+export default SignUpForm;

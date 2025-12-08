@@ -29,7 +29,7 @@ const Header = () => {
       {/* Desktop Auth Button */}
       <div className="group relative">
         <Link
-          href={Routes.SIGNIN}
+          href={Routes.LOGIN}
           className="hidden cursor-pointer pb-1 text-red-500 md:block"
         >
           Sign in
