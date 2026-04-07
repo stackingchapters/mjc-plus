@@ -3,7 +3,17 @@ import Link from "next/link";
 import { Routes } from "@/src/_enums/routes.enum";
 import MjcLogo from "../ui/MjcLogo";
 
-const navItems = ["Home", "Modules", "About Us", "Sponsors"];
+interface NavItem {
+  label: string;
+  path: string;
+}
+
+const navItems: NavItem[] = [
+  { label: "Home",     path: Routes.HOME },
+  { label: "Modules",  path: Routes.MODULES },
+  { label: "About Us", path: Routes.ABOUT },
+  { label: "Sponsors", path: Routes.SPONSORS },
+];
 
 const Header = () => {
   return (
@@ -12,13 +22,13 @@ const Header = () => {
       {/* Desktop Nav */}
       <nav>
         <ul className="hidden gap-14 md:flex">
-          {navItems.map((item, idx) => (
-            <li key={idx} className="group relative">
+          {navItems.map((item) => (
+            <li key={item.label} className="group relative">
               <Link
-                href={item === "About Us" ? Routes.ABOUT : ""}
+                href={item.path}
                 className="block pb-1 text-inherit transition duration-200 group-hover:text-red-500"
               >
-                {item}
+                {item.label}
               </Link>
               <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-red-500 transition-all duration-300 ease-out group-hover:w-full"></span>
             </li>
